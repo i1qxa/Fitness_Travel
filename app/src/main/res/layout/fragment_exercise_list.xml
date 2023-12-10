@@ -4,16 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.my_exercise_list.MyExerciseListFragment">
+    tools:context=".ui.exercise_list.ExerciseListFragment">
 
     <TextView
-        android:id="@+id/tvDayOfWeek"
+        android:id="@+id/tvBodyPart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/spinnerBodyPart"
         app:layout_constraintBottom_toBottomOf="@id/spinnerBodyPart"
-        android:text="@string/select_day_of_week"
+        android:text="@string/body_part"
         android:textSize="15sp"
         android:textStyle="italic"
         />
@@ -21,12 +21,14 @@
         android:id="@+id/spinnerBodyPart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/tvDayOfWeek"
+        android:minHeight="32dp"
+        app:layout_constraintStart_toEndOf="@id/tvBodyPart"
         app:layout_constraintTop_toTopOf="parent"
         android:paddingStart="10dp"
         />
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/myExercisesRV"
+        android:id="@+id/rvExercises"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,17 +36,5 @@
         app:layout_constraintTop_toBottomOf="@id/spinnerBodyPart"
         app:layout_constraintBottom_toBottomOf="parent"
         />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabAddExercise"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:src="@android:drawable/ic_input_add"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="15dp"
-        />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

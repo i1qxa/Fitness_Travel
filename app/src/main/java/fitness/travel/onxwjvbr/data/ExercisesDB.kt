@@ -3,6 +3,7 @@ package fitness.travel.onxwjvbr.data
 import android.app.Application
 import androidx.room.Database
 import androidx.room.Room
+import androidx.room.RoomDatabase
 import kotlinx.coroutines.InternalCoroutinesApi
 
 @Database(
@@ -13,7 +14,7 @@ import kotlinx.coroutines.InternalCoroutinesApi
     version = 1,
     exportSchema = false
 )
-abstract class ExercisesDB {
+abstract class ExercisesDB:RoomDatabase() {
     abstract fun ExerciseDao(): ExerciseDao
     abstract fun MyExerciseDao(): MyExerciseDao
 

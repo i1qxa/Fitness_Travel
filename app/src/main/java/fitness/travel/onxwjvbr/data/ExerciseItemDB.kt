@@ -15,4 +15,17 @@ data class ExerciseItemDB(
     val target:String,
     val secondaryMuscles:String,
     val instructions:String,
-)
+){
+    fun toMyExerciseDBItem(day:Int) = MyExerciseItemDB(
+        id = 0,
+        bodyPart = bodyPart,
+        equipment = equipment,
+        gifUrl = gifUrl,
+        remoteId = remoteId,
+        name = name,
+        target = target,
+        secondaryMuscles = secondaryMuscles,
+        instructions = instructions,
+        dayOfWeek = day,
+    )
+}

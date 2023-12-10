@@ -5,6 +5,9 @@
     <string name="equipment">Equipment:</string>
     <string name="target">Target:</string>
     <string name="secondary">Secondary:</string>
+    <string name="my_exercise_list">My Exercise List</string>
+    <string name="exercise_list">Exercise List</string>
+    <string name="exercise">GYM Exercise</string>
     <string-array name="days_of_week">
         <item>Monday</item>
         <item>Tuesday</item>
@@ -14,4 +17,15 @@
         <item>Saturday</item>
         <item>Sunday</item>
     </string-array>
+    <string-array name="body_part">
+        <item>Back</item>
+        <item>Cardio</item>
+        <item>Chest</item>
+        <item>Lower arms</item>
+        <item>Lower legs</item>
+        <item>Neck</item>
+        <item>Shoulders</item>
+        <item>Upper arms</item>
+    </string-array>
+
 </resources>

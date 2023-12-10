@@ -2,6 +2,9 @@ package fitness.travel.onxwjvbr.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import androidx.fragment.app.FragmentManager
 import fitness.travel.onxwjvbr.R
 import fitness.travel.onxwjvbr.databinding.ActivityMainBinding
@@ -21,6 +24,10 @@ class MainActivity : AppCompatActivity() {
     private fun observeFragmentName(){
         FragmentName.fragmentNameLD.observe(this){
             binding.tvFragmentName.text = it
+            val btnBackVisibility = if (it == getString(R.string.my_exercise_list)){
+                View.GONE
+            }else View.VISIBLE
+            binding.btnBack.visibility = btnBackVisibility
         }
     }
 
@@ -29,5 +36,6 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.popBackStack()
         }
     }
+
 
 }

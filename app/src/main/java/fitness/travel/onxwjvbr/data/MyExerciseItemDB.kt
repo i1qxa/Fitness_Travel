@@ -16,10 +16,11 @@ data class MyExerciseItemDB(
     val target:String,
     val secondaryMuscles:String,
     val instructions:String,
-    val dayOfWeek:String,
+    val dayOfWeek:Int,
 ){
-    fun toExerciseItem():ExerciseItem{
-        val secondaryMusclesString = secondaryMuscles.replace("[", "").replace("]", "")
+    fun getSecondaryMusclesString() = secondaryMuscles.replace("[", "").replace("]", "")
+
+    fun getInstructionAsList():String{
         val instructionsSB =StringBuilder()
         var counter = 1
         instructions.replace("[", "").replace("]", "").split(".,").map {
@@ -28,15 +29,29 @@ data class MyExerciseItemDB(
             instructionsSB.append("\n")
             counter++
         }
-        return ExerciseItem(
-            id = id,
-            bodyPart = bodyPart,
-            equipment = equipment,
-            gifUrl = gifUrl,
-            name = name,
-            target = target,
-            secondaryMuscles = secondaryMusclesString,
-            instructions = instructionsSB.toString(),
-        )
+        return instructionsSB.toString()
     }
+
+
+//    fun toExerciseItem():ExerciseItem{
+//        val secondaryMusclesString = secondaryMuscles.replace("[", "").replace("]", "")
+//        val instructionsSB =StringBuilder()
+//        var counter = 1
+//        instructions.replace("[", "").replace("]", "").split(".,").map {
+//            instructionsSB.append("$counter) ")
+//            instructionsSB.append(it)
+//            instructionsSB.append("\n")
+//            counter++
+//        }
+//        return ExerciseItem(
+//            id = id,
+//            bodyPart = bodyPart,
+//            equipment = equipment,
+//            gifUrl = gifUrl,
+//            name = name,
+//            target = target,
+//            secondaryMuscles = secondaryMusclesString,
+//            instructions = instructionsSB.toString(),
+//        )
+//    }
 }
