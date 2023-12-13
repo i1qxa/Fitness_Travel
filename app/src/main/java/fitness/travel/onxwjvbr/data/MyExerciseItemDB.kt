@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import fitness.travel.onxwjvbr.domain.ExerciseItem
 
-@Entity
+@Entity(tableName = "MyExerciseItemDB")
 data class MyExerciseItemDB(
     @PrimaryKey(autoGenerate = true)
     val id:Int,

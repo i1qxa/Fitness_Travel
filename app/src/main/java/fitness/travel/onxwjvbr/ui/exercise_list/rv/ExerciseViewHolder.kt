@@ -6,7 +6,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import fitness.travel.onxwjvbr.R
 
-class ExerciseViewHolder(itemView:View):ViewHolder {
+class ExerciseViewHolder(itemView:View):ViewHolder(itemView) {
     val tvName = itemView.findViewById<TextView>(R.id.tvName)
     val btnAdd = itemView.findViewById<ImageView>(R.id.buttonAdd)
     val btnExpand = itemView.findViewById<ImageView>(R.id.btnExpand)

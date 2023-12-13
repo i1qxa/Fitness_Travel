@@ -1,9 +1,11 @@
 package fitness.travel.onxwjvbr.data
 
+import androidx.annotation.NonNull
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
+@Entity(tableName = "ExerciseItemDB")
 data class ExerciseItemDB(
     @PrimaryKey(autoGenerate = true)
     val id:Int,
@@ -15,6 +17,7 @@ data class ExerciseItemDB(
     val target:String,
     val secondaryMuscles:String,
     val instructions:String,
+    val isExpanded:Int,
 ){
     fun toMyExerciseDBItem(day:Int) = MyExerciseItemDB(
         id = 0,
@@ -28,4 +31,17 @@ data class ExerciseItemDB(
         instructions = instructions,
         dayOfWeek = day,
     )
+    fun getSecondaryMusclesString() = secondaryMuscles.replace("[", "").replace("]", "")
+
+    fun getInstructionAsList():String{
+        val instructionsSB =StringBuilder()
+        var counter = 1
+        instructions.replace("[", "").replace("]", "").split(".,").map {
+            instructionsSB.append("$counter) ")
+            instructionsSB.append(it)
+            instructionsSB.append("\n")
+            counter++
+        }
+        return instructionsSB.toString()
+    }
 }

@@ -11,6 +11,7 @@ import android.widget.Spinner
 import androidx.lifecycle.ViewModelProvider
 import fitness.travel.onxwjvbr.R
 import fitness.travel.onxwjvbr.databinding.FragmentMyExerciseListBinding
+import fitness.travel.onxwjvbr.ui.exercise_list.ExerciseListFragment
 
 class MyExerciseListFragment : Fragment() {
 
@@ -26,19 +27,29 @@ class MyExerciseListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupSpinner(binding.spinnerDayOfWeek, R.array.days_of_week)
+        setupSpinner()
+        setupBtnAddExerciseClickListener()
     }
 
-
-    private fun setupSpinner(spinner: Spinner, arrayId: Int) {
+    private fun setupSpinner() {
         val adapter = ArrayAdapter.createFromResource(
-            requireContext(), arrayId,
+            requireContext(),
+            R.array.days_of_week,
             android.R.layout.simple_spinner_item
         )
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinner.adapter = adapter
+        binding.spinnerDayOfWeek.adapter = adapter
     }
 
-
+    private fun setupBtnAddExerciseClickListener() {
+        binding.fabAddExercise.setOnClickListener {
+            val dayOfWeek = binding.spinnerDayOfWeek.id
+            parentFragmentManager.beginTransaction().apply {
+                replace(R.id.mainConteiner, ExerciseListFragment.newInstance(dayOfWeek))
+                addToBackStack(null)
+                commit()
+            }
+        }
+    }
 
 }

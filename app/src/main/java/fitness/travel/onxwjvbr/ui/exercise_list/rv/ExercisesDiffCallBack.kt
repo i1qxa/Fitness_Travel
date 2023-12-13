@@ -11,6 +11,6 @@ class ExercisesDiffCallBack:DiffUtil.ItemCallback<ExerciseItemDB>() {
     }
 
     override fun areContentsTheSame(oldItem: ExerciseItemDB, newItem: ExerciseItemDB): Boolean {
-        oldItem == newItem
+        return oldItem == newItem
     }
 }

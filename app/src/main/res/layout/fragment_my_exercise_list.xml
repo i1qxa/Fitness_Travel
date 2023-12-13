@@ -11,14 +11,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/spinnerBodyPart"
-        app:layout_constraintBottom_toBottomOf="@id/spinnerBodyPart"
+        app:layout_constraintTop_toTopOf="@id/spinnerDayOfWeek"
+        app:layout_constraintBottom_toBottomOf="@id/spinnerDayOfWeek"
         android:text="@string/select_day_of_week"
         android:textSize="15sp"
         android:textStyle="italic"
         />
     <Spinner
-        android:id="@+id/spinnerBodyPart"
+        android:id="@+id/spinnerDayOfWeek"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toEndOf="@id/tvDayOfWeek"
@@ -31,7 +31,7 @@
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/spinnerBodyPart"
+        app:layout_constraintTop_toBottomOf="@id/spinnerDayOfWeek"
         app:layout_constraintBottom_toBottomOf="parent"
         />
 

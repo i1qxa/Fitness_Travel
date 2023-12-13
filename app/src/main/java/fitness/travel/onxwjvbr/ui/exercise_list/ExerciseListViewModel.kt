@@ -9,7 +9,7 @@ import fitness.travel.onxwjvbr.data.ExerciseItemDB
 import fitness.travel.onxwjvbr.data.ExercisesDB
 import kotlinx.coroutines.launch
 
-class ExerciseListViewModel(application: Application):AndroidViewModel(application) {
+class ExerciseListViewModel(application: Application) : AndroidViewModel(application) {
 
     val dao = ExercisesDB.getInstance(application).ExerciseDao()
 
@@ -20,12 +20,29 @@ class ExerciseListViewModel(application: Application):AndroidViewModel(applicati
     val exercisesList = bodyPartLD.switchMap { bodyPart ->
         dao.getListOfExerciseForBodyPart(bodyPart)
     }
+    val testLD = dao.getListOfExerciseForBodyPart("back")
 
-    fun setBodyPart(bodyPart:String){
-        bodyPartLD.value = bodyPart
+    fun setBodyPart(bodyPart: Int) {
+        bodyPartLD.value = when (bodyPart) {
+            0 -> "back"
+            1 -> "cardio"
+            3 -> "chest"
+            4 -> "lower arms"
+            5 -> "lower legs"
+            6 -> "neck"
+            7 -> "shoulders"
+            else -> "upper arms"
+        }
     }
 
-    fun addExerciseToMyList(item:ExerciseItemDB, day:Int){
+    fun changeExpanded(exerciseItem: ExerciseItemDB) {
+        val isExpanded = if (exerciseItem.isExpanded == 0) 1 else 0
+        viewModelScope.launch {
+            dao.changeExpanded(exerciseItem.copy(isExpanded = isExpanded))
+        }
+    }
+
+    fun addExerciseToMyList(item: ExerciseItemDB, day: Int) {
         viewModelScope.launch {
             myDao.addExerciseItem(item.toMyExerciseDBItem(day))
         }
