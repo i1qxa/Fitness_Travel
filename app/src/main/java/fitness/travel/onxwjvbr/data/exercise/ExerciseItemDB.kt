@@ -1,9 +1,10 @@
-package fitness.travel.onxwjvbr.data
+package fitness.travel.onxwjvbr.data.exercise
 
 import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import fitness.travel.onxwjvbr.data.my_exercise.MyExerciseItemDB
 
 @Entity(tableName = "ExerciseItemDB")
 data class ExerciseItemDB(

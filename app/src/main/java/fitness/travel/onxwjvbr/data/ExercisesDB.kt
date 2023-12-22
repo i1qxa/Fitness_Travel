@@ -4,12 +4,22 @@ import android.app.Application
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import fitness.travel.onxwjvbr.data.exercise.ExerciseDao
+import fitness.travel.onxwjvbr.data.exercise.ExerciseItemDB
+import fitness.travel.onxwjvbr.data.my_exercise.MyExerciseDao
+import fitness.travel.onxwjvbr.data.my_exercise.MyExerciseItemDB
+import fitness.travel.onxwjvbr.data.training.TrainingDB
+import fitness.travel.onxwjvbr.data.training.TrainingDao
+import fitness.travel.onxwjvbr.data.training.training_item.TrainingItemDB
+import fitness.travel.onxwjvbr.data.training.training_item.TrainingItemDao
 import kotlinx.coroutines.InternalCoroutinesApi
 
 @Database(
     entities = [
         ExerciseItemDB::class,
         MyExerciseItemDB::class,
+        TrainingDB::class,
+        TrainingItemDB::class,
     ],
     version = 1,
     exportSchema = false
@@ -17,6 +27,10 @@ import kotlinx.coroutines.InternalCoroutinesApi
 abstract class ExercisesDB:RoomDatabase() {
     abstract fun ExerciseDao(): ExerciseDao
     abstract fun MyExerciseDao(): MyExerciseDao
+
+    abstract fun TrainingDao():TrainingDao
+
+    abstract fun TrainingItemDao():TrainingItemDao
 
 
     companion object {

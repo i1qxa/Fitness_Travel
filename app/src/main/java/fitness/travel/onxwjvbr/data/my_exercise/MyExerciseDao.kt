@@ -1,4 +1,4 @@
-package fitness.travel.onxwjvbr.data
+package fitness.travel.onxwjvbr.data.my_exercise
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao

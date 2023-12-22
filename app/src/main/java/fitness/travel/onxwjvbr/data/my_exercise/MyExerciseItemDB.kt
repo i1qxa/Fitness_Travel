@@ -1,4 +1,4 @@
-package fitness.travel.onxwjvbr.data
+package fitness.travel.onxwjvbr.data.my_exercise
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
