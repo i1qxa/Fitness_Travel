@@ -1,8 +1,7 @@
 package fitness.travel.onxwjvbr.ui.exercise_list.rv
 
 import androidx.recyclerview.widget.DiffUtil
-import fitness.travel.onxwjvbr.data.ExerciseItemDB
-import fitness.travel.onxwjvbr.data.ExercisesDB
+import fitness.travel.onxwjvbr.data.exercise.ExerciseItemDB
 
 class ExercisesDiffCallBack:DiffUtil.ItemCallback<ExerciseItemDB>() {
 

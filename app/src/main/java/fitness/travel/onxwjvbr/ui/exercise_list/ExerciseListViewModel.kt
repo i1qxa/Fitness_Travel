@@ -5,8 +5,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
-import fitness.travel.onxwjvbr.data.ExerciseItemDB
 import fitness.travel.onxwjvbr.data.ExercisesDB
+import fitness.travel.onxwjvbr.data.exercise.ExerciseItemDB
 import kotlinx.coroutines.launch
 
 class ExerciseListViewModel(application: Application) : AndroidViewModel(application) {

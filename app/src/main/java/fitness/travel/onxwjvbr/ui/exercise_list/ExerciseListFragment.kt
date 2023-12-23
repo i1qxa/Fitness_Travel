@@ -18,6 +18,8 @@ import fitness.travel.onxwjvbr.ui.exercise_list.rv.ExercisesRVAdapter
 import kotlinx.coroutines.launch
 
 private const val DAY_OF_WEEK = "day_of_week"
+const val API_KEY = "1a29ccc9c9mshed9e4da7e217435p1efa8ajsned0632a69413"
+const val API_HOST = "exercisedb.p.rapidapi.com"
 
 class ExerciseListFragment : Fragment(), AdapterView.OnItemSelectedListener {
     var dyaOfWeek: Int? = null

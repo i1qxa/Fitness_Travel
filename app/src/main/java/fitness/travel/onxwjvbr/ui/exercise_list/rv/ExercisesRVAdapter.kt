@@ -2,19 +2,33 @@ package fitness.travel.onxwjvbr.ui.exercise_list.rv
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import coil.load
 import fitness.travel.onxwjvbr.R
-import fitness.travel.onxwjvbr.data.ExerciseItemDB
+import fitness.travel.onxwjvbr.data.exercise.ExerciseItemDB
+import fitness.travel.onxwjvbr.domain.ExerciseItemRemote
+import fitness.travel.onxwjvbr.ui.exercise_list.API_HOST
+import fitness.travel.onxwjvbr.ui.exercise_list.API_KEY
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.serialization.json.Json
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.Response
+import org.json.JSONException
+import java.io.IOException
 
-class ExercisesRVAdapter:ListAdapter<ExerciseItemDB, ViewHolder>(ExercisesDiffCallBack()) {
+class ExercisesRVAdapter : ListAdapter<ExerciseItemDB, ViewHolder>(ExercisesDiffCallBack()) {
 
-    var onBtnAddClickListener : ((ExerciseItemDB) -> Unit)? = null
-    var onItemClickListener : ((ExerciseItemDB) -> Unit)? = null
+    var onBtnAddClickListener: ((ExerciseItemDB) -> Unit)? = null
+    var onItemClickListener: ((ExerciseItemDB) -> Unit)? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        return when(viewType){
+        return when (viewType) {
             0 -> ExerciseViewHolder(
                 layoutInflater.inflate(
                     R.layout.exercise_item,
@@ -22,6 +36,7 @@ class ExercisesRVAdapter:ListAdapter<ExerciseItemDB, ViewHolder>(ExercisesDiffCa
                     false
                 )
             )
+
             else -> ExerciseExpandedViewHolder(
                 layoutInflater.inflate(
                     R.layout.exercise_item_expanded,
@@ -34,8 +49,8 @@ class ExercisesRVAdapter:ListAdapter<ExerciseItemDB, ViewHolder>(ExercisesDiffCa
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        if (holder is ExerciseViewHolder){
-            with(holder){
+        if (holder is ExerciseViewHolder) {
+            with(holder) {
                 tvName.text = item.name
                 tvBodyPart.text = item.bodyPart
                 tvEquipment.text = item.equipment
@@ -48,18 +63,51 @@ class ExercisesRVAdapter:ListAdapter<ExerciseItemDB, ViewHolder>(ExercisesDiffCa
                     onItemClickListener?.invoke(item)
                 }
             }
-        }else if (holder is ExerciseExpandedViewHolder){
-            with(holder){
+        } else if (holder is ExerciseExpandedViewHolder) {
+            with(holder) {
                 tvName.text = item.name
-                tvInstruction.text=item.getInstructionAsList()
-                ivInstruction.load("https://v2.exercisedb.io/image/ekSNP6QmE-Btlu")
-                TODO("Need to realise downloading gif from api")
+                tvInstruction.text = item.getInstructionAsList()
+//                ivInstruction.load("https://v2.exercisedb.io/image/ekSNP6QmE-Btlu")
+                getImgSrc(item.remoteId, holder)
                 btnExpand.setOnClickListener {
                     onItemClickListener?.invoke(item)
                 }
             }
         }
 
+    }
+
+    fun getImgSrc(exerciseId: String, holder: ExerciseExpandedViewHolder) {
+        val url = "https://exercisedb.p.rapidapi.com/exercises/exercise/$exerciseId"
+        val client = OkHttpClient()
+        val request = Request.Builder()
+            .url(url)
+            .get()
+            .addHeader("X-RapidAPI-Key", API_KEY)
+            .addHeader("X-RapidAPI-Host", API_HOST)
+            .build()
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+
+            }
+            override fun onResponse(call: Call, response: Response) {
+                if (response.isSuccessful) {
+                    val exercise = response.body?.string()?.let { convertJsonToExercise(it) }
+                    if (exercise != null) {
+                        holder.ivInstruction.load(exercise.gifUrl)
+                    }
+                }
+            }
+        })
+
+    }
+
+    private fun convertJsonToExercise(inputString: String): ExerciseItemRemote? {
+        return try {
+            Json.decodeFromString<ExerciseItemRemote>(inputString)
+        } catch (e: JSONException) {
+            null
+        }
     }
 
     override fun getItemViewType(position: Int): Int {

@@ -5,7 +5,6 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.switchMap
 import fitness.travel.onxwjvbr.data.ExercisesDB
-import fitness.travel.onxwjvbr.data.MyExerciseItemDB
 
 class MyExerciseListViewModel(application: Application):AndroidViewModel(application) {
 

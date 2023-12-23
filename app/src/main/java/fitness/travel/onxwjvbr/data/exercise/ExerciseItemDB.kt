@@ -1,11 +1,11 @@
 package fitness.travel.onxwjvbr.data.exercise
 
-import androidx.annotation.NonNull
-import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import fitness.travel.onxwjvbr.data.my_exercise.MyExerciseItemDB
+import kotlinx.serialization.Serializable
 
+@Serializable
 @Entity(tableName = "ExerciseItemDB")
 data class ExerciseItemDB(
     @PrimaryKey(autoGenerate = true)
