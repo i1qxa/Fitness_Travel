@@ -4,7 +4,11 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.switchMap
+import androidx.lifecycle.viewModelScope
 import fitness.travel.onxwjvbr.data.ExercisesDB
+import fitness.travel.onxwjvbr.data.my_exercise.MyExerciseItemDB
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MyExerciseListViewModel(application: Application):AndroidViewModel(application) {
 
@@ -18,6 +22,12 @@ class MyExerciseListViewModel(application: Application):AndroidViewModel(applica
 
     fun changeDayOfWeek(day:Int){
         selectedDayLD.value = day
+    }
+
+    fun removeMyExerciseItem(item:MyExerciseItemDB){
+        viewModelScope.launch(Dispatchers.IO) {
+            myExercisesDao.removeExerciseItem(item)
+        }
     }
 
 }

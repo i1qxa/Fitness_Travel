@@ -67,7 +67,6 @@ class ExercisesRVAdapter : ListAdapter<ExerciseItemDB, ViewHolder>(ExercisesDiff
             with(holder) {
                 tvName.text = item.name
                 tvInstruction.text = item.getInstructionAsList()
-//                ivInstruction.load("https://v2.exercisedb.io/image/ekSNP6QmE-Btlu")
                 getImgSrc(item.remoteId, holder)
                 btnExpand.setOnClickListener {
                     onItemClickListener?.invoke(item)

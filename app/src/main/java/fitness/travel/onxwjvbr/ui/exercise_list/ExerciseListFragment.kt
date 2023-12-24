@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import fitness.travel.onxwjvbr.R
 import fitness.travel.onxwjvbr.databinding.FragmentExerciseListBinding
+import fitness.travel.onxwjvbr.domain.FragmentName
 import fitness.travel.onxwjvbr.ui.exercise_list.rv.ExercisesRVAdapter
 import kotlinx.coroutines.launch
 
@@ -42,10 +43,15 @@ class ExerciseListFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupFragmentName()
         setupRecyclerView()
         setupRVAdapter()
         setupSpinnerBodyPart()
         observeExerciseList()
+    }
+
+    private fun setupFragmentName() {
+        FragmentName.changeFragmentName(requireContext().getString(R.string.exercise_list))
     }
 
     private fun observeExerciseList() {

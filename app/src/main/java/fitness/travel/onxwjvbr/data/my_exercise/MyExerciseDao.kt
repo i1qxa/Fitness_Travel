@@ -11,7 +11,7 @@ import androidx.room.Query
 interface MyExerciseDao {
 
     @Query("SELECT * FROM MyExerciseItemDB WHERE dayOfWeek =:dayOfWeek")
-    fun getExerciseListForDayOfWeek(dayOfWeek:Int):LiveData<MyExerciseItemDB>
+    fun getExerciseListForDayOfWeek(dayOfWeek:Int):LiveData<List<MyExerciseItemDB>>
 
     @Delete
     suspend fun removeExerciseItem(exerciseItem:MyExerciseItemDB)
