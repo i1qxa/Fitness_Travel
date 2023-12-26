@@ -13,6 +13,9 @@ interface MyExerciseDao {
     @Query("SELECT * FROM MyExerciseItemDB WHERE dayOfWeek =:dayOfWeek")
     fun getExerciseListForDayOfWeek(dayOfWeek:Int):LiveData<List<MyExerciseItemDB>>
 
+    @Query("SELECT * FROM MyExerciseItemDB WHERE dayOfWeek =:dayOfWeek")
+    suspend fun getExerciseList(dayOfWeek:Int):List<MyExerciseItemDB>
+
     @Delete
     suspend fun removeExerciseItem(exerciseItem:MyExerciseItemDB)
 

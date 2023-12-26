@@ -47,6 +47,18 @@
         android:focusable="true" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabTrainingList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:src="@drawable/subject_24px"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/fabStartTreining"
+        app:layout_constraintEnd_toStartOf="@id/fabAddExercise"
+        android:layout_margin="15dp"
+        android:focusable="true" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabStartTreining"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

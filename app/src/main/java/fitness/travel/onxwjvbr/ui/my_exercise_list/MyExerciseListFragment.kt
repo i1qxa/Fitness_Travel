@@ -16,6 +16,8 @@ import fitness.travel.onxwjvbr.databinding.FragmentMyExerciseListBinding
 import fitness.travel.onxwjvbr.domain.FragmentName
 import fitness.travel.onxwjvbr.ui.exercise_list.ExerciseListFragment
 import fitness.travel.onxwjvbr.ui.my_exercise_list.rv.MyExerciseRVAdapter
+import fitness.travel.onxwjvbr.ui.training_item.TrainingItemFragment
+import fitness.travel.onxwjvbr.ui.training_list.TrainingListFragment
 
 class MyExerciseListFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
@@ -34,7 +36,7 @@ class MyExerciseListFragment : Fragment(), AdapterView.OnItemSelectedListener {
         super.onViewCreated(view, savedInstanceState)
         setupFragmentName()
         setupSpinner()
-        setupBtnAddExerciseClickListener()
+        setupFabClickListeners()
         setupRecyclerView()
         setupRVAdapter()
         observeViewModel()
@@ -56,7 +58,7 @@ class MyExerciseListFragment : Fragment(), AdapterView.OnItemSelectedListener {
             adapter = rvAdapter
             layoutManager = LinearLayoutManager(
                 requireContext(),
-                androidx.recyclerview.widget.RecyclerView.VERTICAL,
+                RecyclerView.VERTICAL,
                 false
             )
         }
@@ -72,6 +74,7 @@ class MyExerciseListFragment : Fragment(), AdapterView.OnItemSelectedListener {
         viewModel.myExercisesListLD.observe(viewLifecycleOwner){
             rvAdapter.submitList(it)
         }
+        observeNewTraining()
     }
 
     private fun setupSpinner() {
@@ -85,6 +88,12 @@ class MyExerciseListFragment : Fragment(), AdapterView.OnItemSelectedListener {
         binding.spinnerDayOfWeek.onItemSelectedListener = this
     }
 
+    private fun setupFabClickListeners(){
+        setupBtnAddExerciseClickListener()
+        setupBtnTrainingListClickListener()
+        setupBtnPlayTrainingClickListener()
+    }
+
     private fun setupBtnAddExerciseClickListener() {
         binding.fabAddExercise.setOnClickListener {
             val dayOfWeek = binding.spinnerDayOfWeek.selectedItemPosition
@@ -93,6 +102,36 @@ class MyExerciseListFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 addToBackStack(null)
                 commit()
             }
+        }
+    }
+
+    private fun setupBtnTrainingListClickListener(){
+        binding.fabTrainingList.setOnClickListener{
+            parentFragmentManager.beginTransaction().apply {
+                replace(R.id.mainConteiner, TrainingListFragment())
+                addToBackStack(null)
+                commit()
+            }
+        }
+    }
+
+    private fun setupBtnPlayTrainingClickListener(){
+        binding.fabStartTreining.setOnClickListener {
+            viewModel.startNewTraining()
+        }
+    }
+
+    private fun observeNewTraining(){
+        viewModel.newTrainingId.observe(viewLifecycleOwner){ trainingId ->
+            if (trainingId!=null){
+                viewModel.clearNewTrainingId()
+                parentFragmentManager.beginTransaction().apply {
+                    replace(R.id.mainConteiner, TrainingItemFragment.newInstance(trainingId))
+                    addToBackStack(null)
+                    commit()
+                }
+            }
+
         }
     }
 

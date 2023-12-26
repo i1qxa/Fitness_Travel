@@ -13,8 +13,11 @@ interface TrainingDao {
     @Query("SELECT * FROM trainingdb ORDER BY date")
     fun getTrainings():LiveData<List<TrainingDB>>
 
+    @Query("SELECT * FROM trainingdb WHERE id =:id")
+    fun getTrainingById(id:Long):TrainingDB
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun addTraining(training:TrainingDB)
+    suspend fun addTraining(training:TrainingDB):Long
 
     @Delete
     suspend fun removeTrainingItem(training:TrainingDB)

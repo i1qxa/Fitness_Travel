@@ -12,4 +12,5 @@ data class TrainingItemDB(
     val weight:Int,
     val amountRepeat:Int,
     val duration:Long,
+    val exerciseName:String,
 )
