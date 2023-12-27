@@ -27,10 +27,12 @@
         android:id="@+id/btnAddRepeat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:minHeight="48dp"
         android:src="@drawable/add_24px"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/tvExerciseAmountRepeat"
         app:layout_constraintBottom_toBottomOf="@id/tvExerciseAmountRepeat"
+        android:contentDescription="@string/add_repeat_of_exercise"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

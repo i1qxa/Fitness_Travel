@@ -34,5 +34,17 @@
     <string name="training_duration">Duration</string>
     <string name="training_day">Day</string>
     <string name="amount_of_repeat">repeat: %1$d</string>
+    <string name="header_background">Header background</string>
+    <string name="navigation_back">Navigation back</string>
+    <string name="expand_gym_exercise">Expand GYM Exercise</string>
+    <string name="add_exercise_in_my_list">Add Exercise in my List</string>
+    <string name="collapse_exercise_description">Collapse Exercise description</string>
+    <string name="exercise_instruction">Exercise Instruction</string>
+    <string name="exercise_img">Exercise Img</string>
+    <string name="button_add_new_exercises_in_myexerciselist">Button Add new Exercises in MyExerciseList</string>
+    <string name="start_training">Start Training</string>
+    <string name="list_of_trainings">List of Trainings</string>
+    <string name="remove_exercise_from_my_exercise_list">Remove exercise from my Exercise List</string>
+    <string name="add_repeat_of_exercise">Add repeat of Exercise</string>
 
 </resources>

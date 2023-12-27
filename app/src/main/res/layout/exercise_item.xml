@@ -16,7 +16,6 @@
         app:layout_constraintTop_toTopOf="parent"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:text="Push UP's"
         />
 
     <ImageView
@@ -27,6 +26,7 @@
         app:layout_constraintStart_toEndOf="@id/tvName"
         app:layout_constraintTop_toTopOf="@id/tvName"
         app:layout_constraintBottom_toBottomOf="@id/tvName"
+        android:contentDescription="@string/expand_gym_exercise"
         />
 
     <ImageView
@@ -36,6 +36,7 @@
         android:src="@drawable/btn_add"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/add_exercise_in_my_list"
         />
 
     <androidx.constraintlayout.widget.Guideline
@@ -56,6 +57,7 @@
         app:layout_constraintTop_toBottomOf="@id/tvName"
         android:text="@string/body_part"
         android:paddingStart="10dp"
+        android:paddingEnd="10dp"
         />
     <TextView
         android:id="@+id/tvEquipmentHeader"
@@ -67,6 +69,7 @@
         app:layout_constraintTop_toBottomOf="@id/tvBodyPartHeader"
         android:text="@string/equipment"
         android:paddingStart="10dp"
+        android:paddingEnd="10dp"
         android:paddingBottom="10dp"
         />
     <TextView
