@@ -2,17 +2,16 @@ package fitness.travel.onxwjvbr.ui.exercise_list.rv
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import coil.load
+import coil.transform.CircleCropTransformation
 import fitness.travel.onxwjvbr.R
 import fitness.travel.onxwjvbr.data.exercise.ExerciseItemDB
 import fitness.travel.onxwjvbr.domain.ExerciseItemRemote
 import fitness.travel.onxwjvbr.ui.exercise_list.API_HOST
 import fitness.travel.onxwjvbr.ui.exercise_list.API_KEY
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import fitness.travel.onxwjvbr.ui.firstCharToUpperCase
 import kotlinx.serialization.json.Json
 import okhttp3.Call
 import okhttp3.Callback
@@ -51,7 +50,7 @@ class ExercisesRVAdapter : ListAdapter<ExerciseItemDB, ViewHolder>(ExercisesDiff
         val item = getItem(position)
         if (holder is ExerciseViewHolder) {
             with(holder) {
-                tvName.text = item.name
+                tvName.text = item.name.firstCharToUpperCase()
                 tvBodyPart.text = item.bodyPart
                 tvEquipment.text = item.equipment
                 tvTarget.text = item.target
@@ -59,24 +58,29 @@ class ExercisesRVAdapter : ListAdapter<ExerciseItemDB, ViewHolder>(ExercisesDiff
                 btnAdd.setOnClickListener {
                     onBtnAddClickListener?.invoke(item)
                 }
-                btnExpand.setOnClickListener {
+                holder.itemView.setOnClickListener {
                     onItemClickListener?.invoke(item)
                 }
             }
         } else if (holder is ExerciseExpandedViewHolder) {
             with(holder) {
-                tvName.text = item.name
+                tvName.text = item.name.firstCharToUpperCase()
                 tvInstruction.text = item.getInstructionAsList()
                 getImgSrc(item.remoteId, holder)
-                btnExpand.setOnClickListener {
+                holder.itemView.setOnClickListener {
                     onItemClickListener?.invoke(item)
+                }
+                holder.btnAdd.setOnClickListener {
+                    onBtnAddClickListener?.invoke(item)
                 }
             }
         }
 
     }
 
-    fun getImgSrc(exerciseId: String, holder: ExerciseExpandedViewHolder) {
+
+
+    private fun getImgSrc(exerciseId: String, holder: ExerciseExpandedViewHolder) {
         val url = "https://exercisedb.p.rapidapi.com/exercises/exercise/$exerciseId"
         val client = OkHttpClient()
         val request = Request.Builder()
@@ -93,7 +97,10 @@ class ExercisesRVAdapter : ListAdapter<ExerciseItemDB, ViewHolder>(ExercisesDiff
                 if (response.isSuccessful) {
                     val exercise = response.body?.string()?.let { convertJsonToExercise(it) }
                     if (exercise != null) {
-                        holder.ivInstruction.load(exercise.gifUrl)
+                        holder.ivInstruction.load(exercise.gifUrl){
+                            placeholder(R.mipmap.ic_launcher)
+                            transformations(CircleCropTransformation())
+                        }
                     }
                 }
             }

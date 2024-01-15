@@ -14,8 +14,8 @@
         app:layout_constraintTop_toTopOf="@id/spinnerDayOfWeek"
         app:layout_constraintBottom_toBottomOf="@id/spinnerDayOfWeek"
         android:text="@string/select_day_of_week"
-        android:textSize="15sp"
-        android:textStyle="italic"
+        android:textStyle="bold"
+        android:textSize="18sp"
         />
     <Spinner
         android:id="@+id/spinnerDayOfWeek"

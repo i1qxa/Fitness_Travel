@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import fitness.travel.onxwjvbr.R
-import fitness.travel.onxwjvbr.data.exercise.ExerciseItemDB
 import fitness.travel.onxwjvbr.data.training.training_item.TrainingItemDB
+import fitness.travel.onxwjvbr.ui.firstCharToUpperCase
 
 class TrainingItemRVAdapter :
     ListAdapter<TrainingItemDB, TrainingItemViewHolder>(TrainingItemDiffCallBack()) {
@@ -26,7 +26,7 @@ class TrainingItemRVAdapter :
     override fun onBindViewHolder(holder: TrainingItemViewHolder, position: Int) {
         val item = getItem(position)
         with(holder) {
-            tvTrainingExerciseName.text = item.exerciseName
+            tvTrainingExerciseName.text = item.exerciseName.firstCharToUpperCase()
             tvExerciseAmountOfRepeat.text = this.itemView.context.getString(R.string.amount_of_repeat, item.amountRepeat)
             btnAddAmount.setOnClickListener {
                 onBtnAddAmountClickListener?.invoke(item)

@@ -4,34 +4,45 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/exercise_item_background"
-    android:padding="10dp"
-    android:layout_margin="5dp">
+    android:layout_margin="5dp"
+    android:elevation="5dp"
+    >
 
     <TextView
         android:id="@+id/tvTrainingExerciseName"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnAddRepeat"
+        android:layout_marginHorizontal="10dp"
+        android:gravity="center_horizontal"
         app:layout_constraintTop_toTopOf="parent"
-        android:textColor="@color/black"
-        android:textStyle="bold"
+        style="@style/MyTVHeader"
+        android:textSize="20sp"
         />
     <TextView
         android:id="@+id/tvExerciseAmountRepeat"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnAddRepeat"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintTop_toBottomOf="@id/tvTrainingExerciseName"
+        style="@style/MyTVValue"
+        android:textSize="18sp"
+        android:gravity="center_horizontal"
         />
     <ImageButton
         android:id="@+id/btnAddRepeat"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:minHeight="48dp"
+        android:layout_height="0dp"
         android:src="@drawable/add_24px"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tvExerciseAmountRepeat"
-        app:layout_constraintBottom_toBottomOf="@id/tvExerciseAmountRepeat"
+        android:background="@drawable/add_background"
+        android:paddingHorizontal="10dp"
         android:contentDescription="@string/add_repeat_of_exercise"
         />
 

@@ -8,8 +8,7 @@ import fitness.travel.onxwjvbr.R
 
 class ExerciseExpandedViewHolder(itemView:View):ViewHolder(itemView) {
     val tvName = itemView.findViewById<TextView>(R.id.tvNameExp)
-    val btnAdd = itemView.findViewById<ImageView>(R.id.buttonAddExp)
-    val btnExpand = itemView.findViewById<ImageView>(R.id.btnCollapse)
+    val btnAdd = itemView.findViewById<ImageView>(R.id.btnAddToMyExerciseList)
     val ivInstruction = itemView.findViewById<ImageView>(R.id.ivExerciseInstruction)
     val tvInstruction = itemView.findViewById<TextView>(R.id.tvInstruction)
 }

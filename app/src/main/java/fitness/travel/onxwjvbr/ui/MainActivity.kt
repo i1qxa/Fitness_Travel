@@ -36,3 +36,8 @@ class MainActivity : AppCompatActivity() {
 
 
 }
+
+fun String.firstCharToUpperCase():String{
+    val firstChar = this[0].uppercaseChar()
+    return firstChar.toString() + this.drop(0)
+}

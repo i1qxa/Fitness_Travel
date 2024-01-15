@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import fitness.travel.onxwjvbr.R
 import fitness.travel.onxwjvbr.data.my_exercise.MyExerciseItemDB
+import fitness.travel.onxwjvbr.ui.firstCharToUpperCase
 
 class MyExerciseRVAdapter : ListAdapter<MyExerciseItemDB, MyExercisesVH>(
     MyExerciseDiffCallBack()
@@ -26,7 +27,7 @@ class MyExerciseRVAdapter : ListAdapter<MyExerciseItemDB, MyExercisesVH>(
     override fun onBindViewHolder(holder: MyExercisesVH, position: Int) {
         val item = getItem(position)
         with(holder) {
-            tvName.text = item.name
+            tvName.text = item.name.firstCharToUpperCase()
             tvBodyPart.text = item.bodyPart
             tvEquipment.text = item.equipment
             tvTarget.text = item.target

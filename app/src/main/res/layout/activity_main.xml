@@ -35,8 +35,8 @@
         app:layout_constraintStart_toEndOf="@id/btnBack"
         app:layout_constraintTop_toTopOf="@id/btnBack"
         app:layout_constraintBottom_toBottomOf="@id/btnBack"
-        android:textSize="18sp"
-        android:textStyle="bold"
+        style="@style/MyTVHeader"
+        android:textSize="20sp"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
         />
