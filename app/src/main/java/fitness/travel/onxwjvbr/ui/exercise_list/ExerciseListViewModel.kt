@@ -17,10 +17,11 @@ class ExerciseListViewModel(application: Application) : AndroidViewModel(applica
 
     val bodyPartLD = MutableLiveData<String>()
 
+    val toastLD = MutableLiveData<Boolean>()
+
     val exercisesList = bodyPartLD.switchMap { bodyPart ->
         dao.getListOfExerciseForBodyPart(bodyPart)
     }
-    val testLD = dao.getListOfExerciseForBodyPart("back")
 
     fun setBodyPart(bodyPart: Int) {
         bodyPartLD.value = when (bodyPart) {
@@ -45,7 +46,12 @@ class ExerciseListViewModel(application: Application) : AndroidViewModel(applica
     fun addExerciseToMyList(item: ExerciseItemDB, day: Int) {
         viewModelScope.launch {
             myDao.addExerciseItem(item.toMyExerciseDBItem(day))
+            toastLD.postValue(true)
         }
+    }
+
+    fun resetToast(){
+        toastLD.value = false
     }
 
 }

@@ -46,5 +46,6 @@
     <string name="list_of_trainings">List of Trainings</string>
     <string name="remove_exercise_from_my_exercise_list">Remove exercise from my Exercise List</string>
     <string name="add_repeat_of_exercise">Add repeat of Exercise</string>
+    <string name="exercise_added_toast">Exercise successfully added in Exercise list</string>
 
 </resources>

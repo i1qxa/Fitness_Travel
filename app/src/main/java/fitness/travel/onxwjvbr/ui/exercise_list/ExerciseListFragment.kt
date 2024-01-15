@@ -1,22 +1,20 @@
 package fitness.travel.onxwjvbr.ui.exercise_list
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import fitness.travel.onxwjvbr.R
 import fitness.travel.onxwjvbr.databinding.FragmentExerciseListBinding
 import fitness.travel.onxwjvbr.domain.FragmentName
 import fitness.travel.onxwjvbr.ui.exercise_list.rv.ExercisesRVAdapter
-import kotlinx.coroutines.launch
 
 private const val DAY_OF_WEEK = "day_of_week"
 const val API_KEY = "1a29ccc9c9mshed9e4da7e217435p1efa8ajsned0632a69413"
@@ -48,6 +46,21 @@ class ExerciseListFragment : Fragment(), AdapterView.OnItemSelectedListener {
         setupRVAdapter()
         setupSpinnerBodyPart()
         observeExerciseList()
+        observeToast()
+    }
+
+    private fun observeToast() {
+        viewModel.toastLD.observe(viewLifecycleOwner) {
+            if (it){
+                Toast.makeText(
+                    requireContext(),
+                    requireContext().getString(R.string.exercise_added_toast),
+                    Toast.LENGTH_SHORT
+                ).show()
+                viewModel.resetToast()
+            }
+
+        }
     }
 
     private fun setupFragmentName() {
