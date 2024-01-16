@@ -9,5 +9,7 @@ import fitness.travel.onxwjvbr.R
 class TrainingItemViewHolder(itemView:View):ViewHolder(itemView) {
     val tvTrainingExerciseName = itemView.findViewById<TextView>(R.id.tvTrainingExerciseName)
     val tvExerciseAmountOfRepeat = itemView.findViewById<TextView>(R.id.tvExerciseAmountRepeat)
+    val tvTotalDuration = itemView.findViewById<TextView>(R.id.tvTotalDuration)
+    val tvAvgWeight = itemView.findViewById<TextView>(R.id.tvAvgWeight)
     val btnAddAmount = itemView.findViewById<ImageButton>(R.id.btnAddRepeat)
 }

@@ -2,23 +2,18 @@ package fitness.travel.onxwjvbr.data.training.training_item
 
 import android.icu.text.SimpleDateFormat
 import android.icu.util.Calendar
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 
-@Entity(tableName = "TrainingItemDB")
-data class TrainingItemDB(
-    @PrimaryKey(autoGenerate = true)
-    val id:Int,
+data class TrainingCommonInfo(
     val trainingId:Int,
     val exerciseId:Int,
-    val weight:Int,
-    val amountRepeat:Int,
-    val duration:Long,
     val exerciseName:String,
+    val countRepeat:Int,
+    val avgWeight:Int,
+    val totalDuration:Long,
 ){
     fun getFormattedDuration():String{
         val time = Calendar.getInstance()
-        time.timeInMillis = duration
+        time.timeInMillis = totalDuration
         val formatter = SimpleDateFormat("mm:ss")
         return formatter.format(time)
     }

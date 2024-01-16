@@ -26,16 +26,17 @@ class TrainingItemViewModel(application: Application) : AndroidViewModel(applica
     val trainingIdLD = MutableLiveData<Int>()
 
     val exerciseListLD = trainingIdLD.switchMap {
-        dao.getTrainingItemList(it)
+        dao.getTrainingItemListCommon(it)
     }
 
-    fun increaseAmountOfRepeat(item: TrainingItemDB) {
-        viewModelScope.launch(Dispatchers.IO) {
-            dao.addTrainingItem(item.copy(amountRepeat = (item.amountRepeat + 1)))
-        }
-    }
+//    fun increaseAmountOfRepeat(item: TrainingItemDB) {
+//        viewModelScope.launch(Dispatchers.IO) {
+////            dao.addTrainingItem(item.copy(amountRepeat = (item.amountRepeat + 1)))
+//            dao.addTrainingItem(item.copy(id = 0, amountRepeat = (item.amountRepeat + 1)))
+//        }
+//    }
 
-    val startTime = Calendar.getInstance().timeInMillis
+//    val startTime = Calendar.getInstance().timeInMillis
 
     val timerLD = MutableLiveData<String>()
 

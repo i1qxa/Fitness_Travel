@@ -47,5 +47,15 @@
     <string name="remove_exercise_from_my_exercise_list">Remove exercise from my Exercise List</string>
     <string name="add_repeat_of_exercise">Add repeat of Exercise</string>
     <string name="exercise_added_toast">Exercise successfully added in Exercise list</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="start">Start</string>
+    <string name="weight">Weight</string>
+    <string name="weight_header">Weight header</string>
+    <string name="repeat">Repeat</string>
+    <string name="amount">Amount</string>
+    <string name="total_duration">Total Duration: </string>
+    <string name="repeat_amount">Repeat Amount: </string>
+    <string name="avg_weight">Avg Weight:</string>
 
 </resources>

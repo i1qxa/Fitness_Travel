@@ -11,9 +11,11 @@ import androidx.recyclerview.widget.RecyclerView
 import fitness.travel.onxwjvbr.R
 import fitness.travel.onxwjvbr.databinding.FragmentTrainingItemBinding
 import fitness.travel.onxwjvbr.domain.FragmentName
+import fitness.travel.onxwjvbr.ui.training_item.full.ItemFullFragment
 import fitness.travel.onxwjvbr.ui.training_item.rv.TrainingItemRVAdapter
 
 private const val TRAINING_DAY = "day"
+
 class TrainingItemFragment : Fragment() {
     private var trainingId: Int? = null
     private val binding by lazy { FragmentTrainingItemBinding.inflate(layoutInflater) }
@@ -47,16 +49,16 @@ class TrainingItemFragment : Fragment() {
         observeFinishTraining()
     }
 
-    private fun observeFinishTraining(){
-        viewModel.shouldFinishTraining.observe(viewLifecycleOwner){
-            if (it){
+    private fun observeFinishTraining() {
+        viewModel.shouldFinishTraining.observe(viewLifecycleOwner) {
+            if (it) {
                 parentFragmentManager.popBackStack()
             }
         }
     }
 
-    private fun observeTimer(){
-        viewModel.timerLD.observe(viewLifecycleOwner){
+    private fun observeTimer() {
+        viewModel.timerLD.observe(viewLifecycleOwner) {
             binding.tvTimer.text = it
         }
     }
@@ -72,19 +74,28 @@ class TrainingItemFragment : Fragment() {
         }
     }
 
-    private fun setupAdapter(){
+    private fun setupAdapter() {
         rvAdapter.onBtnAddAmountClickListener = {
-            viewModel.increaseAmountOfRepeat(it)
+            val newFragment = ItemFullFragment.newInstance(
+                it.trainingId,
+                it.exerciseId,
+                it.exerciseName
+            )
+            parentFragmentManager.beginTransaction().apply {
+                replace(R.id.mainConteiner, newFragment)
+                addToBackStack(null)
+                commit()
+            }
         }
     }
 
-    private fun observeVM(){
-        viewModel.exerciseListLD.observe(viewLifecycleOwner){
+    private fun observeVM() {
+        viewModel.exerciseListLD.observe(viewLifecycleOwner) {
             rvAdapter.submitList(it)
         }
     }
 
-    private fun setupBtnFinishClickListener(){
+    private fun setupBtnFinishClickListener() {
         binding.btnFinish.setOnClickListener {
             viewModel.finishTraining()
         }

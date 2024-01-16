@@ -11,10 +11,14 @@ import fitness.travel.onxwjvbr.domain.TrainingItemWithName
 @Dao
 interface TrainingItemDao {
 
-    //    @Query("SELECT item.id, item.trainingId, item.exerciseId, exercise.name, item.weight, item.amountRepeat, item.duration   FROM trainingitemdb item LEFT JOIN exerciseitemdb exercise ON item.exerciseId = exercise.id WHERE item.trainingId =:trainingId GROUP BY item.exerciseId")
-//    fun getTrainingItemList(trainingId:Int):LiveData<List<TrainingItemWithName>>
     @Query("SELECT * FROM trainingitemdb WHERE trainingId =:trainingId")
     fun getTrainingItemList(trainingId: Int): LiveData<List<TrainingItemDB>>
+
+    @Query("SELECT trainingId, exerciseId, exerciseName, COUNT(*) as countRepeat, AVG(weight) as avgWeight, SUM(duration) as totalDuration FROM trainingitemdb WHERE trainingId =:trainingId GROUP BY exerciseId")
+    fun getTrainingItemListCommon(trainingId: Int): LiveData<List<TrainingCommonInfo>>
+
+    @Query("SELECT * FROM trainingitemdb WHERE trainingId =:trainingId AND exerciseId =:exerciseId")
+    fun getExerciseInTraining(trainingId: Int, exerciseId:Int):LiveData<List<TrainingItemDB>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addTrainingItem(item: TrainingItemDB)
