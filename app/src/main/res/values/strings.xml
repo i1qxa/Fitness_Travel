@@ -57,5 +57,6 @@
     <string name="total_duration">Total Duration: </string>
     <string name="repeat_amount">Repeat Amount: </string>
     <string name="avg_weight">Avg Weight:</string>
+    <string name="most_populare_exercises">Most populare exercises</string>
 
 </resources>
