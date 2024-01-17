@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import fitness.travel.onxwjvbr.R
 import fitness.travel.onxwjvbr.databinding.FragmentTrainingListBinding
 import fitness.travel.onxwjvbr.domain.FragmentName
+import fitness.travel.onxwjvbr.ui.training_chart.TrainingChartFragment
 import fitness.travel.onxwjvbr.ui.training_item.TrainingItemFragment
 import fitness.travel.onxwjvbr.ui.training_list.rv.TrainingRVAdapter
 
@@ -35,6 +36,7 @@ class TrainingListFragment : Fragment() {
         setupRV()
         observeVM()
         setupAdapter()
+        setupBtnChartCLickListener()
     }
 
     private fun setupAdapter(){
@@ -69,6 +71,16 @@ class TrainingListFragment : Fragment() {
     private fun observeVM(){
         viewModel.trainingList.observe(viewLifecycleOwner){
             rvAdapter.submitList(it)
+        }
+    }
+
+    private fun setupBtnChartCLickListener(){
+        binding.btnChart.setOnClickListener {
+            parentFragmentManager.beginTransaction().apply {
+                replace(R.id.mainConteiner, TrainingChartFragment())
+                addToBackStack(null)
+                commit()
+            }
         }
     }
 

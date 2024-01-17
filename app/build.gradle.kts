@@ -43,8 +43,8 @@ android {
 
 dependencies {
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
     val room_version = "2.6.1"
 
     implementation("androidx.core:core-ktx:1.12.0")
@@ -62,5 +62,7 @@ dependencies {
     //Internet
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.2")
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
+
+    implementation ("com.github.AAChartModel:AAChartCore-Kotlin:-SNAPSHOT")
 
 }
