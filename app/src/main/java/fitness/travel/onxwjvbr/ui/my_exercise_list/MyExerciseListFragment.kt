@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Spinner
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -42,7 +42,7 @@ class MyExerciseListFragment : Fragment(), AdapterView.OnItemSelectedListener {
         observeViewModel()
     }
 
-    private fun setupFragmentName(){
+    private fun setupFragmentName() {
         FragmentName.changeFragmentName(requireContext().getString(R.string.my_exercise_list))
     }
 
@@ -70,9 +70,19 @@ class MyExerciseListFragment : Fragment(), AdapterView.OnItemSelectedListener {
         }
     }
 
-    private fun observeViewModel(){
-        viewModel.myExercisesListLD.observe(viewLifecycleOwner){
-            rvAdapter.submitList(it)
+    private fun observeViewModel() {
+        viewModel.myExercisesListLD.observe(viewLifecycleOwner) {
+            if (it.isNotEmpty()) {
+                binding.myExercisesRV.visibility = View.VISIBLE
+                binding.tvEmptyExerciseList.visibility = View.GONE
+                rvAdapter.submitList(it)
+                setupBtnPlayTrainingClickListener(true)
+            } else {
+                binding.tvEmptyExerciseList.visibility = View.VISIBLE
+                binding.myExercisesRV.visibility = View.GONE
+                setupBtnPlayTrainingClickListener(false)
+            }
+
         }
         observeNewTraining()
     }
@@ -88,10 +98,10 @@ class MyExerciseListFragment : Fragment(), AdapterView.OnItemSelectedListener {
         binding.spinnerDayOfWeek.onItemSelectedListener = this
     }
 
-    private fun setupFabClickListeners(){
+    private fun setupFabClickListeners() {
         setupBtnAddExerciseClickListener()
         setupBtnTrainingListClickListener()
-        setupBtnPlayTrainingClickListener()
+//        setupBtnPlayTrainingClickListener()
     }
 
     private fun setupBtnAddExerciseClickListener() {
@@ -105,8 +115,8 @@ class MyExerciseListFragment : Fragment(), AdapterView.OnItemSelectedListener {
         }
     }
 
-    private fun setupBtnTrainingListClickListener(){
-        binding.fabTrainingList.setOnClickListener{
+    private fun setupBtnTrainingListClickListener() {
+        binding.fabTrainingList.setOnClickListener {
             parentFragmentManager.beginTransaction().apply {
                 replace(R.id.mainConteiner, TrainingListFragment())
                 addToBackStack(null)
@@ -115,15 +125,24 @@ class MyExerciseListFragment : Fragment(), AdapterView.OnItemSelectedListener {
         }
     }
 
-    private fun setupBtnPlayTrainingClickListener(){
+    private fun setupBtnPlayTrainingClickListener(isReady: Boolean) {
         binding.fabStartTreining.setOnClickListener {
-            viewModel.startNewTraining()
+            if (isReady) {
+                viewModel.startNewTraining()
+            } else {
+                Toast.makeText(
+                    requireContext(),
+                    requireContext().getString(R.string.empty_exercise_list),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
+
     }
 
-    private fun observeNewTraining(){
-        viewModel.newTrainingId.observe(viewLifecycleOwner){ trainingId ->
-            if (trainingId!=null){
+    private fun observeNewTraining() {
+        viewModel.newTrainingId.observe(viewLifecycleOwner) { trainingId ->
+            if (trainingId != null) {
                 viewModel.clearNewTrainingId()
                 parentFragmentManager.beginTransaction().apply {
                     replace(R.id.mainConteiner, TrainingItemFragment.newInstance(trainingId))

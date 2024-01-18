@@ -70,7 +70,16 @@ class TrainingListFragment : Fragment() {
 
     private fun observeVM(){
         viewModel.trainingList.observe(viewLifecycleOwner){
-            rvAdapter.submitList(it)
+            if (it.isNotEmpty()){
+                rvAdapter.submitList(it)
+                binding.rvTrainingList.visibility = View.VISIBLE
+                binding.tvEmptyTrainingList.visibility = View.GONE
+                binding.btnChart.visibility = View.VISIBLE
+            }else{
+                binding.rvTrainingList.visibility = View.GONE
+                binding.tvEmptyTrainingList.visibility = View.VISIBLE
+                binding.btnChart.visibility = View.GONE
+            }
         }
     }
 
