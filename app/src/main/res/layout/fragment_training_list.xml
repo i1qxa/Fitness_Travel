@@ -42,12 +42,22 @@
         android:id="@+id/btnChart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/chart"
+        android:src="@drawable/chart_btn"
         android:layout_margin="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:contentDescription="@string/most_popular_exercises"
         />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnStartTraining"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/gym_exercise_btn"
+        android:layout_margin="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:contentDescription="@string/most_popular_exercises"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

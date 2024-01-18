@@ -85,7 +85,7 @@
         android:clickable="true"
         android:contentDescription="@string/start_training"
         android:focusable="true"
-        android:src="@drawable/play_circle_24px"
+        android:src="@drawable/gym_exercise_btn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import fitness.travel.onxwjvbr.R
 import fitness.travel.onxwjvbr.databinding.FragmentTrainingItemBinding
 import fitness.travel.onxwjvbr.domain.FragmentName
+import fitness.travel.onxwjvbr.ui.exercise_list.ExerciseListFragment
 import fitness.travel.onxwjvbr.ui.training_item.full.ItemFullFragment
 import fitness.travel.onxwjvbr.ui.training_item.rv.TrainingItemRVAdapter
 
@@ -39,7 +40,7 @@ class TrainingItemFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.trainingIdLD.value = trainingId
+        startTraining()
         FragmentName.changeFragmentName(requireContext().getString(R.string.training))
         observeTimer()
         setupAdapter()
@@ -47,6 +48,31 @@ class TrainingItemFragment : Fragment() {
         observeVM()
         setupBtnFinishClickListener()
         observeFinishTraining()
+        observeTrainingId()
+    }
+
+    private fun startTraining() {
+        if (trainingId != null) {
+            viewModel.trainingIdLD.value = trainingId
+        } else {
+            viewModel.startNewTraining()
+        }
+    }
+
+    private fun observeTrainingId() {
+        viewModel.trainingIdLD.observe(viewLifecycleOwner) {
+            setupBtnAddExerciseItemClickListener(it.toLong())
+        }
+    }
+
+    private fun setupBtnAddExerciseItemClickListener(trainingId: Long) {
+        binding.btnAddExercise.setOnClickListener {
+            parentFragmentManager.beginTransaction().apply {
+                replace(R.id.mainConteiner, ExerciseListFragment.newInstance(10, trainingId))
+                addToBackStack(null)
+                commit()
+            }
+        }
     }
 
     private fun observeFinishTraining() {
@@ -91,7 +117,12 @@ class TrainingItemFragment : Fragment() {
 
     private fun observeVM() {
         viewModel.exerciseListLD.observe(viewLifecycleOwner) {
-            rvAdapter.submitList(it)
+            if (it.isNotEmpty()) {
+                rvAdapter.submitList(it)
+                binding.tvExerciseListIsEmpty.visibility = View.GONE
+            }else{
+                binding.tvExerciseListIsEmpty.visibility = View.VISIBLE
+            }
         }
     }
 

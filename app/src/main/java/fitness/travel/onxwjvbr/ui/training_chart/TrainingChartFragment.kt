@@ -9,7 +9,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.github.aachartmodel.aainfographics.aachartcreator.AAChartModel
 import com.github.aachartmodel.aainfographics.aachartcreator.AAChartType
 import com.github.aachartmodel.aainfographics.aachartcreator.AASeriesElement
+import fitness.travel.onxwjvbr.R
 import fitness.travel.onxwjvbr.databinding.FragmentTrainingChartBinding
+import fitness.travel.onxwjvbr.domain.FragmentName
 import fitness.travel.onxwjvbr.ui.firstCharToUpperCase
 
 class TrainingChartFragment : Fragment() {
@@ -26,6 +28,11 @@ class TrainingChartFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observeViewModel()
+        setupFragmentName()
+    }
+
+    private fun setupFragmentName(){
+        FragmentName.changeFragmentName(requireContext().getString(R.string.workout_chart))
     }
 
     private fun observeViewModel(){

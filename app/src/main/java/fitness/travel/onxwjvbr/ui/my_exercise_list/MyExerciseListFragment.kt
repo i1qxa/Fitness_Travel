@@ -101,14 +101,13 @@ class MyExerciseListFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private fun setupFabClickListeners() {
         setupBtnAddExerciseClickListener()
         setupBtnTrainingListClickListener()
-//        setupBtnPlayTrainingClickListener()
     }
 
     private fun setupBtnAddExerciseClickListener() {
         binding.fabAddExercise.setOnClickListener {
             val dayOfWeek = binding.spinnerDayOfWeek.selectedItemPosition
             parentFragmentManager.beginTransaction().apply {
-                replace(R.id.mainConteiner, ExerciseListFragment.newInstance(dayOfWeek))
+                replace(R.id.mainConteiner, ExerciseListFragment.newInstance(dayOfWeek, 0))
                 addToBackStack(null)
                 commit()
             }

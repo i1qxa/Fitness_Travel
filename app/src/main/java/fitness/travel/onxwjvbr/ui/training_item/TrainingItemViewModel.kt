@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
 import fitness.travel.onxwjvbr.data.ExercisesDB
-import fitness.travel.onxwjvbr.data.training.training_item.TrainingItemDB
+import fitness.travel.onxwjvbr.data.training.TrainingDB
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -29,14 +29,6 @@ class TrainingItemViewModel(application: Application) : AndroidViewModel(applica
         dao.getTrainingItemListCommon(it)
     }
 
-//    fun increaseAmountOfRepeat(item: TrainingItemDB) {
-//        viewModelScope.launch(Dispatchers.IO) {
-////            dao.addTrainingItem(item.copy(amountRepeat = (item.amountRepeat + 1)))
-//            dao.addTrainingItem(item.copy(id = 0, amountRepeat = (item.amountRepeat + 1)))
-//        }
-//    }
-
-//    val startTime = Calendar.getInstance().timeInMillis
 
     val timerLD = MutableLiveData<String>()
 
@@ -53,6 +45,13 @@ class TrainingItemViewModel(application: Application) : AndroidViewModel(applica
             )
             isTrainingFinish = true
             shouldFinishTraining.postValue(true)
+        }
+    }
+
+    fun startNewTraining() {
+        val newTraining = TrainingDB(0, 0, Calendar.getInstance().timeInMillis, 2)
+        viewModelScope.launch {
+            trainingIdLD.postValue(trainingDao.addTraining(newTraining).toInt())
         }
     }
 

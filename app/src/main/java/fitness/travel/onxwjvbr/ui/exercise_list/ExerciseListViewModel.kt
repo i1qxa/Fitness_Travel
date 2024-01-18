@@ -7,11 +7,14 @@ import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
 import fitness.travel.onxwjvbr.data.ExercisesDB
 import fitness.travel.onxwjvbr.data.exercise.ExerciseItemDB
+import fitness.travel.onxwjvbr.data.training.training_item.TrainingItemDB
 import kotlinx.coroutines.launch
 
 class ExerciseListViewModel(application: Application) : AndroidViewModel(application) {
 
     val dao = ExercisesDB.getInstance(application).ExerciseDao()
+
+    val trainingDao = ExercisesDB.getInstance(application).TrainingItemDao()
 
     val myDao = ExercisesDB.getInstance(application).MyExerciseDao()
 
@@ -43,14 +46,28 @@ class ExerciseListViewModel(application: Application) : AndroidViewModel(applica
         }
     }
 
-    fun addExerciseToMyList(item: ExerciseItemDB, day: Int) {
+    fun addExerciseToMyList(item: ExerciseItemDB, day: Int, trainingId: Int?) {
         viewModelScope.launch {
-            myDao.addExerciseItem(item.toMyExerciseDBItem(day))
-            toastLD.postValue(true)
+            if (trainingId == null || trainingId == 0) {
+                myDao.addExerciseItem(item.toMyExerciseDBItem(day))
+                toastLD.postValue(true)
+            }else{
+                val trainingExercise = TrainingItemDB(
+                    0,
+                    trainingId,
+                    item.id,
+                    0,
+                    0,
+                    0,
+                    item.name
+                )
+                trainingDao.addTrainingItem(trainingExercise)
+                toastLD.postValue(true)
+            }
         }
     }
 
-    fun resetToast(){
+    fun resetToast() {
         toastLD.value = false
     }
 

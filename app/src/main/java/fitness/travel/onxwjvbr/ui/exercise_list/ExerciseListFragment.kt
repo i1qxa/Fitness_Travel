@@ -17,11 +17,13 @@ import fitness.travel.onxwjvbr.domain.FragmentName
 import fitness.travel.onxwjvbr.ui.exercise_list.rv.ExercisesRVAdapter
 
 private const val DAY_OF_WEEK = "day_of_week"
+private const val TRAINING_ID = "training_id"
 const val API_KEY = "1a29ccc9c9mshed9e4da7e217435p1efa8ajsned0632a69413"
 const val API_HOST = "exercisedb.p.rapidapi.com"
 
 class ExerciseListFragment : Fragment(), AdapterView.OnItemSelectedListener {
     var dyaOfWeek: Int? = null
+    var trainingId:Long? = null
     private val binding by lazy { FragmentExerciseListBinding.inflate(layoutInflater) }
     private val rvAdapter by lazy { ExercisesRVAdapter() }
     private val viewModel by lazy { ViewModelProvider(this)[ExerciseListViewModel::class.java] }
@@ -29,6 +31,7 @@ class ExerciseListFragment : Fragment(), AdapterView.OnItemSelectedListener {
         super.onCreate(savedInstanceState)
         arguments?.let {
             dyaOfWeek = it.getInt(DAY_OF_WEEK)
+            trainingId = it.getLong(TRAINING_ID)
         }
     }
 
@@ -83,7 +86,7 @@ class ExerciseListFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private fun setupRVAdapter() {
         with(rvAdapter) {
             onBtnAddClickListener = {
-                viewModel.addExerciseToMyList(it, dyaOfWeek ?: 1)
+                viewModel.addExerciseToMyList(it, dyaOfWeek?:1, trainingId?.toInt())
             }
             onItemClickListener = {
                 viewModel.changeExpanded(it)
@@ -116,10 +119,11 @@ class ExerciseListFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     companion object {
         @JvmStatic
-        fun newInstance(dayOfWeek: Int) =
+        fun newInstance(dayOfWeek: Int, trainingId:Long?) =
             ExerciseListFragment().apply {
                 arguments = Bundle().apply {
                     putInt(DAY_OF_WEEK, dayOfWeek)
+                    putLong(TRAINING_ID, trainingId?:0)
                 }
             }
     }

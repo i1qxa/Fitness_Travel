@@ -58,5 +58,12 @@
     <string name="most_popular_exercises">Most popular exercises</string>
     <string name="empty_exercise_list">Your exercise list is empty. Add new exercises by clicking the add button.</string>
     <string name="empty_training_list">Your workout list is empty. Start a new workout on the screen with a list of your exercises.</string>
+    <string name="button_home">Button Home</string>
+    <string name="workout_plan">WORKOUT PLAN</string>
+    <string name="workout_list">WORKOUT LIST</string>
+    <string name="workout_chart">Workout Chart</string>
+    <string name="item_background">Item Background</string>
+    <string name="home">Home</string>
+    <string name="exercise_list_is_empty">Add exercises to your workout by clicking the add exercise button at the bottom of the screen.</string>
 
 </resources>

@@ -37,7 +37,9 @@ class TrainingListFragment : Fragment() {
         observeVM()
         setupAdapter()
         setupBtnChartCLickListener()
+        setupBtnStartTrainingClickListener()
     }
+
 
     private fun setupAdapter(){
         rvAdapter.onItemClickListener = {
@@ -87,6 +89,16 @@ class TrainingListFragment : Fragment() {
         binding.btnChart.setOnClickListener {
             parentFragmentManager.beginTransaction().apply {
                 replace(R.id.mainConteiner, TrainingChartFragment())
+                addToBackStack(null)
+                commit()
+            }
+        }
+    }
+
+    private fun setupBtnStartTrainingClickListener(){
+        binding.btnStartTraining.setOnClickListener {
+            parentFragmentManager.beginTransaction().apply {
+                replace(R.id.mainConteiner, TrainingItemFragment())
                 addToBackStack(null)
                 commit()
             }
